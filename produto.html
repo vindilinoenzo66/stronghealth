@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Whey Protein Isolado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .product-detail {
+    display: flex;
+    gap: 40px;
+    padding: 40px 32px;
+    background: #fff;
+  }
+  .pd-gallery { width: 340px; flex-shrink: 0; }
+  .pd-main-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--gray-1);
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
+  .pd-thumbs { display: flex; gap: 8px; }
+  .pd-thumb {
+    width: 56px; height: 56px;
+    background: var(--gray-1);
+    border-radius: 6px;
+    border: 1.5px solid var(--gray-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .pd-thumb.active-thumb { border-color: var(--green); }
+  .pd-info { flex: 1; }
+  .pd-brand { font-size: 11px; color: var(--gray-3); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .pd-name { font-size: 26px; font-weight: 800; color: var(--graphite); line-height: 1.2; margin-bottom: 12px; }
+  .pd-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .pd-stars { color: var(--yellow); font-size: 14px; }
+  .pd-reviews { font-size: 13px; color: var(--gray-3); }
+  .pd-price-block { margin-bottom: 20px; }
+  .pd-price-old { font-size: 14px; color: var(--gray-3); text-decoration: line-through; margin-bottom: 4px; }
+  .pd-price { font-size: 34px; font-weight: 800; color: var(--graphite); }
+  .pd-savings {
+    display: inline-block;
+    background: #e8f9f0;
+    color: var(--green-d);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+  }
+  .pd-flavor-label { font-size: 13px; font-weight: 700; color: var(--graphite); margin-bottom: 8px; }
+  .flavor-options { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .flavor-chip {
+    padding: 6px 14px;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--graphite);
+    background: #fff;
+  }
+  .flavor-chip.active { border-color: var(--green); color: var(--green); }
+  .qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .qty-box {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    background: var(--gray-1);
+    border: none;
+    padding: 8px 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--graphite);
+    font-family: 'Barlow', sans-serif;
+  }
+  .qty-num { padding: 0 16px; font-weight: 700; font-size: 15px; color: var(--graphite); }
+  .pd-actions { display: flex; gap: 10px; margin-bottom: 24px; }
+  .btn-cart {
+    flex: 1;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+  }
+  .btn-wishlist {
+    background: #fff;
+    color: var(--graphite);
+    border: 1.5px solid var(--gray-2);
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .pd-benefits { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .benefit-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; font-weight: 600; }
+  .benefit-icon { color: var(--green); font-size: 14px; }
+  .pd-tabs { display: flex; border-bottom: 1.5px solid var(--gray-2); gap: 0; margin-bottom: 16px; }
+  .pd-tab {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-3);
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -1.5px;
+  }
+  .pd-tab.active { color: var(--green-d); border-bottom-color: var(--green); }
+  .pd-desc { font-size: 13px; color: #555; line-height: 1.7; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav">
+  <a class="sh-logo" href="index.html">STRONG<em>HEALTH</em></a>
+  <div class="sh-nav-links">
+    <a href="index.html">Início</a>
+    <a href="catalogo.html" class="active-link">Produtos</a>
+    <a href="blog.html">Blog</a>
+  </div>
+  <div class="sh-nav-right">
+    <a href="carrinho.html" class="sh-nav-icon" style="position:relative">🛒<span class="cart-badge">3</span></a>
+    <a href="login.html" class="btn-primary">Minha Conta</a>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div style="padding:12px 32px;background:#fff;border-bottom:1px solid #e5e7eb;font-size:12px;color:#9ca3af">
+  <a href="index.html" style="color:#2ecc71;text-decoration:none;font-weight:600">Início</a> &rsaquo;
+  <a href="catalogo.html" style="color:#2ecc71;text-decoration:none;font-weight:600"> Proteínas</a> &rsaquo;
+  <span style="color:#26293a;font-weight:700"> Whey Protein Isolado 900g</span>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="product-detail">
+  <div class="pd-gallery">
+    <div class="pd-main-img">🥛</div>
+    <div class="pd-thumbs">
+      <div class="pd-thumb active-thumb">🥛</div>
+      <div class="pd-thumb">📦</div>
+      <div class="pd-thumb">🏷️</div>
+      <div class="pd-thumb">📋</div>
+    </div>
+  </div>
+  <div class="pd-info">
+    <div class="pd-brand">MaxPower Nutrition</div>
+    <div class="pd-name">Whey Protein Isolado 900g</div>
+    <div class="pd-rating">
+      <span class="pd-stars">★★★★★</span>
+      <span style="font-size:14px;font-weight:700;color:#26293a">4.9</span>
+      <span class="pd-reviews">284 avaliações · 520 vendidos</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <span class="badge badge-red">-20% OFF</span>
+      <span class="badge badge-green">FRETE GRÁTIS</span>
+      <span class="badge badge-yellow">MAIS VENDIDO</span>
+    </div>
+    <div class="pd-price-block">
+      <div class="pd-price-old">De: R$ 237,00</div>
+      <div>
+        <span class="pd-price">R$ 189,90</span>
+        <span class="pd-savings">Você economiza R$ 47,10</span>
+      </div>
+      <div style="font-size:12px;color:#555;margin-top:6px;font-weight:400">
+        ou 6x de <strong style="color:#26293a">R$ 31,65</strong> sem juros
+      </div>
+    </div>
+    <div class="pd-flavor-label">Sabor:</div>
+    <div class="flavor-options">
+      <div class="flavor-chip active">Chocolate</div>
+      <div class="flavor-chip">Baunilha</div>
+      <div class="flavor-chip">Morango</div>
+      <div class="flavor-chip">Natural</div>
+      <div class="flavor-chip">Cookies & Cream</div>
+    </div>
+    <div class="qty-row">
+      <span style="font-size:13px;font-weight:700;color:#26293a">Quantidade:</span>
+      <div class="qty-box">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="qty">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <span style="font-size:12px;color:#9ca3af">14 unidades em estoque</span>
+    </div>
+    <div class="pd-actions">
+      <button class="btn-cart" onclick="location.href='carrinho.html'">🛒 Adicionar ao Carrinho</button>
+      <button class="btn-wishlist">♡</button>
+    </div>
+    <div class="pd-benefits">
+      <div class="benefit-item"><span class="benefit-icon">✓</span> Entrega em 1-3 dias úteis</div>
+      <div class="benefit-item"><span class="benefit-icon">✓</span> Troca fácil em 30 dias</div>
+      <div class="benefit-item"><span class="benefit-icon">✓</span> Produto original garantido</div>
+      <div class="benefit-item"><span class="benefit-icon">✓</span> Pagamento seguro SSL</div>
+    </div>
+    <div class="pd-tabs">
+      <div class="pd-tab active">Descrição</div>
+      <div class="pd-tab">Informação Nutricional</div>
+      <div class="pd-tab">Como usar</div>
+      <div class="pd-tab">Avaliações (284)</div>
+    </div>
+    <div class="pd-desc">
+      O Whey Protein Isolado MaxPower é ideal para quem busca alta concentração proteica com baixo teor de carboidratos e gorduras. Fabricado com filtração por troca iônica, oferece 27g de proteína por dose, absorção rápida e excelente aminograma — perfeito para consumo pós-treino visando maximizar a recuperação e hipertrofia muscular.
+      <br><br>
+      Indicado para: praticantes de musculação, atletas e pessoas que necessitam de alto aporte proteico diário.
+    </div>
+  </div>
+</div>
+
+<!-- RECOMMENDED -->
+<div class="section-dark">
+  <div class="section-head">
+    <div class="section-title">Quem comprou também levou</div>
+    <a class="section-link" href="catalogo.html">Ver mais →</a>
+  </div>
+  <div class="product-grid">
+    <a href="produto.html" class="product-card">
+      <div class="product-img">💊</div>
+      <div class="product-body">
+        <div class="product-cat">Aminoácido</div>
+        <div class="product-name">Creatina 300g</div>
+        <div class="product-stars">★★★★★</div>
+        <div class="product-price-row"><span class="product-price">R$ 74,90</span></div>
+        <button class="btn-add">+ Carrinho</button>
+      </div>
+    </a>
+    <a href="produto.html" class="product-card">
+      <div class="product-img">⚡</div>
+      <div class="product-body">
+        <div class="product-cat">Energia</div>
+        <div class="product-name">Pré-treino Explosão 300g</div>
+        <div class="product-stars">★★★★☆</div>
+        <div class="product-price-row"><span class="product-price">R$ 129,90</span></div>
+        <button class="btn-add">+ Carrinho</button>
+      </div>
+    </a>
+    <a href="produto.html" class="product-card">
+      <div class="product-img">🧬</div>
+      <div class="product-body">
+        <div class="product-cat">Aminoácido</div>
+        <div class="product-name">BCAA 2:1:1 300g</div>
+        <div class="product-stars">★★★★★</div>
+        <div class="product-price-row"><span class="product-price">R$ 89,90</span></div>
+        <button class="btn-add">+ Carrinho</button>
+      </div>
+    </a>
+    <a href="produto.html" class="product-card">
+      <div class="product-img">🌿</div>
+      <div class="product-body">
+        <div class="product-cat">Vitaminas</div>
+        <div class="product-name">Multivitamínico Sport 60 caps</div>
+        <div class="product-stars">★★★★★</div>
+        <div class="product-price-row"><span class="product-price">R$ 49,90</span></div>
+        <button class="btn-add">+ Carrinho</button>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  © 2026 Strong Health — Academia Digital de Suplementação. Todos os direitos reservados.
+</footer>
+
+<script>
+  function changeQty(delta) {
+    const el = document.getElementById('qty');
+    let v = parseInt(el.textContent) + delta;
+    if (v < 1) v = 1;
+    if (v > 14) v = 14;
+    el.textContent = v;
+  }
+  document.querySelectorAll('.flavor-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.flavor-chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.pd-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.pd-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .auth-page {
+    min-height: calc(100vh - 60px);
+    background: var(--gray-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .auth-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-2);
+    padding: 40px;
+    width: 420px;
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .auth-logo { text-align: center; margin-bottom: 24px; }
+  .auth-logo-text { font-size: 22px; font-weight: 800; color: var(--graphite); letter-spacing: 1px; }
+  .auth-logo-text span { color: var(--green); }
+  .auth-tabs {
+    display: flex;
+    background: var(--gray-1);
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 28px;
+  }
+  .auth-tab {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--gray-3);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    font-family: 'Barlow', sans-serif;
+  }
+  .auth-tab.active { background: #fff; color: var(--graphite); box-shadow: var(--shadow); }
+  .auth-form-group { margin-bottom: 16px; }
+  .auth-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--graphite);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .auth-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Barlow', sans-serif;
+    color: var(--graphite);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .auth-input:focus { border-color: var(--green); }
+  .auth-forgot { text-align: right; margin-bottom: 20px; }
+  .auth-forgot a { font-size: 12px; color: var(--green-d); font-weight: 600; text-decoration: none; }
+  .auth-btn {
+    width: 100%;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    margin-bottom: 16px;
+    transition: background 0.2s;
+  }
+  .auth-btn:hover { background: var(--green-d); }
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-2); }
+  .auth-divider span { font-size: 12px; color: var(--gray-3); font-weight: 600; }
+  .auth-social { display: flex; gap: 10px; }
+  .auth-social-btn {
+    flex: 1;
+    border: 1.5px solid var(--gray-2);
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    color: var(--graphite);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .auth-social-btn:hover { background: var(--gray-1); }
+  .auth-terms { text-align: center; margin-top: 20px; font-size: 11px; color: var(--gray-3); }
+  .auth-terms a { color: var(--green-d); font-weight: 600; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav">
+  <a class="sh-logo" href="index.html">STRONG<em>HEALTH</em></a>
+  <div class="sh-nav-links">
+    <a href="index.html">Início</a>
+    <a href="catalogo.html">Produtos</a>
+    <a href="blog.html">Blog</a>
+  </div>
+</nav>
+
+<!-- AUTH PAGE -->
+<div class="auth-page">
+  <div style="display:flex;gap:40px;align-items:flex-start;max-width:860px;width:100%">
+
+    <!-- LEFT: brand message -->
+    <div style="flex:1;padding-top:20px">
+      <div style="font-weight:800;font-size:28px;color:#26293a;line-height:1.2;margin-bottom:16px">
+        Sua jornada<br><span style="color:#2ecc71">começa agora</span>
+      </div>
+      <p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:24px;font-weight:400">
+        Acesse sua conta para acompanhar pedidos, guardar favoritos e receber recomendações personalizadas pelo seu personal trainer digital.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#555">
+          <div style="width:32px;height:32px;background:#e8f9f0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">📦</div>
+          <span>Rastreamento de pedidos em tempo real</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#555">
+          <div style="width:32px;height:32px;background:#e8f9f0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">💪</div>
+          <span>Recomendações por objetivo de treino</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:13px;color:#555">
+          <div style="width:32px;height:32px;background:#e8f9f0;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🏷️</div>
+          <span>Ofertas e descontos exclusivos para membros</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form card -->
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-text">STRONG<span>HEALTH</span></div>
+        <div style="font-size:12px;color:#9ca3af;margin-top:2px">Academia Digital de Suplementação</div>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="showLogin(this)">Entrar</button>
+        <button class="auth-tab" onclick="showRegister(this)">Criar conta</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="login-form">
+        <div class="auth-form-group">
+          <label class="auth-label">E-mail</label>
+          <input class="auth-input" type="email" placeholder="seu@email.com" value="joao.silva@email.com">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label">Senha</label>
+          <input class="auth-input" type="password" value="••••••••">
+        </div>
+        <div class="auth-forgot"><a href="#">Esqueci minha senha</a></div>
+        <button class="auth-btn" onclick="location.href='index.html'">Entrar na conta →</button>
+        <div class="auth-divider"><span>ou continue com</span></div>
+        <div class="auth-social">
+          <button class="auth-social-btn">🔵 Google</button>
+          <button class="auth-social-btn">🍎 Apple</button>
+        </div>
+        <div class="auth-terms">Ao entrar você concorda com os <a href="#">Termos de uso</a> e <a href="#">Privacidade</a></div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="register-form" style="display:none">
+        <div class="auth-form-group">
+          <label class="auth-label">Nome completo</label>
+          <input class="auth-input" type="text" placeholder="João da Silva">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label">E-mail</label>
+          <input class="auth-input" type="email" placeholder="seu@email.com">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label">CPF</label>
+          <input class="auth-input" type="text" placeholder="000.000.000-00">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label">Senha</label>
+          <input class="auth-input" type="password" placeholder="Mínimo 8 caracteres">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label">Objetivo principal</label>
+          <select class="auth-input" style="cursor:pointer">
+            <option>Hipertrofia</option>
+            <option>Emagrecimento</option>
+            <option>Performance</option>
+            <option>Saúde geral</option>
+          </select>
+        </div>
+        <button class="auth-btn" onclick="location.href='index.html'">Criar minha conta →</button>
+        <div class="auth-terms">Ao criar conta você concorda com os <a href="#">Termos de uso</a> e <a href="#">Privacidade</a></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  © 2026 Strong Health — Academia Digital de Suplementação. Todos os direitos reservados.
+</footer>
+
+<script>
+  function showLogin(btn) {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('register-form').style.display = 'none';
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function showRegister(btn) {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

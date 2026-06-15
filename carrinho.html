@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Carrinho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .checkout-layout {
+    display: flex;
+    gap: 24px;
+    padding: 32px;
+    background: var(--gray-1);
+  }
+  .checkout-main { flex: 1; }
+  .checkout-aside { width: 300px; flex-shrink: 0; }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-2);
+  }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item-img {
+    width: 56px; height: 56px;
+    background: var(--gray-1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 13px; font-weight: 700; color: var(--graphite); margin-bottom: 3px; }
+  .cart-item-variant { font-size: 12px; color: var(--gray-3); }
+  .cart-item-right { text-align: right; }
+  .cart-item-price { font-size: 14px; font-weight: 700; color: var(--graphite); margin-bottom: 4px; }
+  .cart-remove { font-size: 11px; color: var(--red); cursor: pointer; font-weight: 600; }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #555;
+    padding: 6px 0;
+  }
+  .summary-row.total {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--graphite);
+    border-top: 1.5px solid var(--gray-2);
+    padding-top: 12px;
+    margin-top: 6px;
+  }
+  .coupon-row { display: flex; gap: 8px; margin: 12px 0; }
+  .coupon-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Barlow', sans-serif;
+    outline: none;
+  }
+  .coupon-input:focus { border-color: var(--green); }
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .step-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
+  .step-circle {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .step-active .step-circle { background: var(--green); color: #fff; }
+  .step-done .step-circle { background: var(--green-l); color: var(--green-d); }
+  .step-inactive .step-circle { background: var(--gray-2); color: var(--gray-3); }
+  .step-active { color: var(--green-d); }
+  .step-inactive { color: var(--gray-3); }
+  .step-line { flex: 1; height: 2px; background: var(--gray-2); margin: 0 8px; }
+  .step-line.done { background: var(--green); }
+  .qty-box {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid var(--gray-2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    background: var(--gray-1);
+    border: none;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--graphite);
+    font-family: 'Barlow', sans-serif;
+  }
+  .qty-num { padding: 0 12px; font-weight: 700; font-size: 13px; color: var(--graphite); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav">
+  <a class="sh-logo" href="index.html">STRONG<em>HEALTH</em></a>
+  <div class="sh-nav-links">
+    <a href="index.html">Início</a>
+    <a href="catalogo.html">Produtos</a>
+  </div>
+  <div class="sh-nav-right">
+    <a href="carrinho.html" class="sh-nav-icon" style="position:relative">🛒<span class="cart-badge">3</span></a>
+  </div>
+</nav>
+
+<!-- STEP INDICATOR -->
+<div style="padding:20px 32px 0;background:var(--gray-1)">
+  <div class="step-indicator">
+    <div class="step-item step-done">
+      <div class="step-circle">✓</div>
+      <span style="font-size:12px;font-weight:700;color:#1a8a4a">Carrinho</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step-item step-active">
+      <div class="step-circle">2</div>
+      <span style="font-size:12px">Endereço</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item step-inactive">
+      <div class="step-circle">3</div>
+      <span style="font-size:12px">Pagamento</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item step-inactive">
+      <div class="step-circle">4</div>
+      <span style="font-size:12px">Confirmação</span>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT BODY -->
+<div class="checkout-layout">
+  <div class="checkout-main">
+    <!-- CART ITEMS -->
+    <div class="card-white">
+      <div class="card-title">🛒 Ficha de Treino — 3 itens</div>
+      <div class="cart-item">
+        <div class="cart-item-img">🥛</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">Whey Protein Isolado 900g</div>
+          <div class="cart-item-variant">Sabor: Chocolate · MaxPower Nutrition</div>
+          <div style="margin-top:6px">
+            <div class="qty-box">
+              <button class="qty-btn">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item-right">
+          <div class="cart-item-price">R$ 189,90</div>
+          <div class="cart-remove">Remover</div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-item-img">💊</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">Creatina Monohidratada 300g</div>
+          <div class="cart-item-variant">Sem sabor · MaxPower Nutrition</div>
+          <div style="margin-top:6px">
+            <div class="qty-box">
+              <button class="qty-btn">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item-right">
+          <div class="cart-item-price">R$ 74,90</div>
+          <div class="cart-remove">Remover</div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-item-img">⚡</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">Pré-treino Explosão Total 300g</div>
+          <div class="cart-item-variant">Sabor: Frutas Vermelhas</div>
+          <div style="margin-top:6px">
+            <div class="qty-box">
+              <button class="qty-btn">−</button>
+              <span class="qty-num">1</span>
+              <button class="qty-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item-right">
+          <div class="cart-item-price">R$ 129,90</div>
+          <div class="cart-remove">Remover</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDRESS FORM -->
+    <div class="card-white">
+      <div class="card-title">📍 Endereço de entrega</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">CEP</label>
+          <input class="form-input filled" type="text" value="01310-100">
+        </div>
+        <div class="form-group" style="flex:3">
+          <label class="form-label">Rua / Avenida</label>
+          <input class="form-input filled" type="text" value="Av. Paulista">
+        </div>
+        <div class="form-group" style="flex:0.8">
+          <label class="form-label">Número</label>
+          <input class="form-input filled" type="text" value="1000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Complemento</label>
+          <input class="form-input" type="text" placeholder="Apto, Bloco...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bairro</label>
+          <input class="form-input filled" type="text" value="Bela Vista">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cidade</label>
+          <input class="form-input filled" type="text" value="São Paulo">
+        </div>
+        <div class="form-group" style="flex:0.5">
+          <label class="form-label">UF</label>
+          <input class="form-input filled" type="text" value="SP">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <label style="font-size:13px;font-weight:700;color:#26293a;margin-bottom:4px">Modalidade de entrega</label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid #2ecc71;border-radius:8px;cursor:pointer;background:#e8f9f0">
+          <input type="radio" name="ship" checked style="accent-color:#2ecc71">
+          <span style="font-size:13px;font-weight:700;color:#26293a">⚡ Expresso — 1-2 dias úteis</span>
+          <span style="margin-left:auto;font-size:13px;font-weight:700;color:#1a8a4a">GRÁTIS</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid #e5e7eb;border-radius:8px;cursor:pointer">
+          <input type="radio" name="ship" style="accent-color:#2ecc71">
+          <span style="font-size:13px;color:#555">📦 Padrão — 3-7 dias úteis</span>
+          <span style="margin-left:auto;font-size:13px;color:#9ca3af">R$ 12,90</span>
+        </label>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:8px">
+      <a href="catalogo.html" class="btn-outline">← Continuar comprando</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY ASIDE -->
+  <div class="checkout-aside">
+    <div class="card-white">
+      <div class="card-title">📋 Resumo do Pedido</div>
+      <div class="summary-row"><span>Subtotal (3 itens)</span><span>R$ 394,70</span></div>
+      <div class="summary-row"><span>Frete expresso</span><span style="color:#1a8a4a;font-weight:700">Grátis</span></div>
+      <div class="summary-row"><span>Desconto cupom</span><span style="color:#c0392b;font-weight:700">− R$ 30,00</span></div>
+      <div class="summary-row total"><span>Total</span><span style="color:#2ecc71">R$ 364,70</span></div>
+      <div style="font-size:12px;color:#9ca3af;margin:6px 0 12px;text-align:center">ou 6x de R$ 60,78 sem juros</div>
+      <div class="coupon-row">
+        <input class="coupon-input" type="text" placeholder="Código de desconto" value="STRONG10">
+        <button class="btn-primary">Aplicar</button>
+      </div>
+      <button class="btn-primary" style="width:100%;padding:14px;font-size:15px;font-weight:700;margin-top:8px" onclick="location.href='login.html'">Ir para pagamento →</button>
+      <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:#9ca3af;font-weight:600">
+        🔒 Pagamento 100% seguro · SSL
+      </div>
+    </div>
+    <div class="card-white">
+      <div style="font-size:13px;font-weight:700;color:#26293a;margin-bottom:10px">💳 Formas de pagamento</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span class="badge badge-graphite">Cartão</span>
+        <span class="badge badge-graphite">Pix</span>
+        <span class="badge badge-graphite">Boleto</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  © 2026 Strong Health — Academia Digital de Suplementação. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

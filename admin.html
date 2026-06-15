@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--gray-1); }
+
+  .admin-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  .admin-sidebar {
+    width: 220px;
+    background: var(--graphite);
+    padding: 20px 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .admin-logo {
+    padding: 0 20px 20px;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--green);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .admin-logo span { color: #fff; }
+  .admin-logo small {
+    display: block;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+  .admin-nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+  .admin-nav-item.active { background: rgba(46,204,113,0.12); color: var(--green); border-left-color: var(--green); }
+  .admin-nav-group {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 20px 6px;
+  }
+  .admin-user {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .admin-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+
+  /* MAIN */
+  .admin-main {
+    flex: 1;
+    margin-left: 220px;
+    padding: 24px;
+  }
+  .admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .admin-title { font-size: 20px; font-weight: 800; color: var(--graphite); }
+
+  /* KPIs */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-2);
+    padding: 16px;
+  }
+  .kpi-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .kpi-green { background: var(--green-l); color: var(--green-d); }
+  .kpi-yellow { background: #fef9e7; color: #a07c10; }
+  .kpi-blue { background: #e6f1fb; color: #185fa5; }
+  .kpi-purple { background: #f0ebff; color: #5a3ea8; }
+  .kpi-label { font-size: 11px; color: var(--gray-3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 800; color: var(--graphite); line-height: 1; margin-bottom: 6px; }
+  .kpi-change { font-size: 11px; font-weight: 700; }
+  .kpi-up { color: var(--green-d); }
+  .kpi-down { color: var(--red); }
+
+  /* CHARTS */
+  .mini-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 60px;
+    padding: 0 4px;
+  }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--green); opacity: 0.7; }
+  .bar.accent { opacity: 1; background: var(--green-d); }
+  .bar-lbl { font-size: 9px; color: var(--gray-3); font-weight: 700; }
+
+  /* TABLE */
+  .admin-table-card {
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-2);
+    overflow: hidden;
+  }
+  .admin-table-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-2);
+  }
+  .admin-table-title { font-size: 14px; font-weight: 700; color: var(--graphite); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--gray-1); }
+  th { padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.8px; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--gray-2); color: #444; }
+  tr:last-child td { border-bottom: none; }
+  .td-name { font-weight: 700; color: var(--graphite); }
+</style>
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <a class="admin-logo" href="index.html">STRONG<span>HEALTH</span><small>Gestão da Academia</small></a>
+
+    <div class="admin-nav-group">Principal</div>
+    <a href="admin.html" class="admin-nav-item active">📊 Dashboard</a>
+    <a href="admin.html" class="admin-nav-item">📦 Pedidos <span style="margin-left:auto;background:rgba(46,204,113,0.2);color:#2ecc71;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700">14</span></a>
+    <a href="admin.html" class="admin-nav-item">🛍️ Produtos</a>
+    <a href="admin.html" class="admin-nav-item">📋 Estoque</a>
+
+    <div class="admin-nav-group">Clientes</div>
+    <a href="admin.html" class="admin-nav-item">👥 Clientes</a>
+    <a href="admin.html" class="admin-nav-item">⭐ Avaliações</a>
+
+    <div class="admin-nav-group">Conteúdo</div>
+    <a href="blog.html" class="admin-nav-item">✍️ Blog</a>
+    <a href="admin.html" class="admin-nav-item">🏷️ Promoções</a>
+
+    <div class="admin-nav-group">Sistema</div>
+    <a href="admin.html" class="admin-nav-item">📈 Relatórios</a>
+    <a href="admin.html" class="admin-nav-item">⚙️ Configurações</a>
+
+    <div class="admin-user">
+      <div class="admin-avatar">R</div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#fff">Rick Li</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.4)">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">Dashboard</div>
+        <div style="font-size:12px;color:#9ca3af;margin-top:2px">Segunda-feira, 15 de junho de 2026</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn-outline" style="font-size:12px;padding:7px 14px">Exportar relatório</button>
+        <a href="catalogo.html" class="btn-primary" style="font-size:12px;padding:7px 14px">+ Novo produto</a>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-green">💰</div>
+        <div class="kpi-label">Receita do mês</div>
+        <div class="kpi-value">R$ 48.290</div>
+        <div class="kpi-change kpi-up">▲ +18% vs mês anterior</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-yellow">📦</div>
+        <div class="kpi-label">Pedidos hoje</div>
+        <div class="kpi-value">37</div>
+        <div class="kpi-change kpi-up">▲ +12% vs ontem</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-blue">👥</div>
+        <div class="kpi-label">Novos clientes</div>
+        <div class="kpi-value">184</div>
+        <div class="kpi-change kpi-up">▲ +6% este mês</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-purple">⚠️</div>
+        <div class="kpi-label">Estoque crítico</div>
+        <div class="kpi-value">5</div>
+        <div class="kpi-change kpi-down">▼ Atenção necessária</div>
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="card-white" style="padding:16px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+          <span style="font-size:13px;font-weight:700;color:#26293a">Receita — últimos 7 dias</span>
+          <span style="font-size:11px;color:#9ca3af">Jun 2026</span>
+        </div>
+        <div class="mini-chart">
+          <div class="bar-wrap"><div class="bar" style="height:32px"></div><div class="bar-lbl">Ter</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:44px"></div><div class="bar-lbl">Qua</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:38px"></div><div class="bar-lbl">Qui</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:52px"></div><div class="bar-lbl">Sex</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:28px"></div><div class="bar-lbl">Sáb</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:22px"></div><div class="bar-lbl">Dom</div></div>
+          <div class="bar-wrap"><div class="bar accent" style="height:58px"></div><div class="bar-lbl">Hoj</div></div>
+        </div>
+      </div>
+      <div class="card-white" style="padding:16px">
+        <div style="font-size:13px;font-weight:700;color:#26293a;margin-bottom:16px">Top categorias</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#555;margin-bottom:4px"><span>🥛 Proteínas</span><span style="font-weight:700;color:#26293a">42%</span></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px"><div style="height:100%;width:42%;background:#2ecc71;border-radius:3px"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#555;margin-bottom:4px"><span>💊 Aminoácidos</span><span style="font-weight:700;color:#26293a">28%</span></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px"><div style="height:100%;width:28%;background:#7b56d3;border-radius:3px"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#555;margin-bottom:4px"><span>⚡ Pré-treino</span><span style="font-weight:700;color:#26293a">18%</span></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px"><div style="height:100%;width:18%;background:#f5c443;border-radius:3px"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#555;margin-bottom:4px"><span>🌿 Vitaminas</span><span style="font-weight:700;color:#26293a">12%</span></div>
+            <div style="height:6px;background:#e5e7eb;border-radius:3px"><div style="height:100%;width:12%;background:#ff8824;border-radius:3px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDERS TABLE -->
+    <div class="admin-table-card">
+      <div class="admin-table-header">
+        <span class="admin-table-title">📦 Pedidos recentes</span>
+        <div style="display:flex;gap:8px">
+          <input type="text" placeholder="Buscar pedido..." style="padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;font-size:12px;font-family:'Barlow',sans-serif;outline:none">
+          <button class="btn-outline" style="font-size:11px;padding:5px 12px">Ver todos</button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Pedido</th>
+            <th>Cliente</th>
+            <th>Produtos</th>
+            <th>Total</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:700;color:#26293a">#1087</td>
+            <td class="td-name">João Silva</td>
+            <td>Whey + Creatina</td>
+            <td style="font-weight:700;color:#26293a">R$ 264,80</td>
+            <td><span class="badge badge-graphite">Pix</span></td>
+            <td><span class="status-pill sp-blue">📦 Enviado</span></td>
+            <td><button style="font-size:11px;border:1px solid #e5e7eb;background:#fff;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;color:#26293a">Ver</button></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#26293a">#1086</td>
+            <td class="td-name">Maria Oliveira</td>
+            <td>BCAA + Vitaminas</td>
+            <td style="font-weight:700;color:#26293a">R$ 139,80</td>
+            <td><span class="badge badge-graphite">Cartão</span></td>
+            <td><span class="status-pill sp-green">✓ Entregue</span></td>
+            <td><button style="font-size:11px;border:1px solid #e5e7eb;background:#fff;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;color:#26293a">Ver</button></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#26293a">#1085</td>
+            <td class="td-name">Pedro Santos</td>
+            <td>Pré-treino x2</td>
+            <td style="font-weight:700;color:#26293a">R$ 259,80</td>
+            <td><span class="badge badge-graphite">Boleto</span></td>
+            <td><span class="status-pill sp-yellow">⏳ Pagamento pendente</span></td>
+            <td><button style="font-size:11px;border:1px solid #e5e7eb;background:#fff;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;color:#26293a">Ver</button></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#26293a">#1084</td>
+            <td class="td-name">Ana Ferreira</td>
+            <td>Whey Isolado 900g</td>
+            <td style="font-weight:700;color:#26293a">R$ 189,90</td>
+            <td><span class="badge badge-graphite">Pix</span></td>
+            <td><span class="status-pill sp-green">✓ Entregue</span></td>
+            <td><button style="font-size:11px;border:1px solid #e5e7eb;background:#fff;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;color:#26293a">Ver</button></td>
+          </tr>
+          <tr>
+            <td style="font-weight:700;color:#26293a">#1083</td>
+            <td class="td-name">Carlos Lima</td>
+            <td>Pack Iniciante</td>
+            <td style="font-weight:700;color:#26293a">R$ 349,90</td>
+            <td><span class="badge badge-graphite">Cartão</span></td>
+            <td><span class="status-pill sp-red">✕ Cancelado</span></td>
+            <td><button style="font-size:11px;border:1px solid #e5e7eb;background:#fff;padding:4px 10px;border-radius:5px;cursor:pointer;font-family:'Barlow',sans-serif;color:#26293a">Ver</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

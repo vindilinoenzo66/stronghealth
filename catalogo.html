@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .catalog-layout {
+    display: flex;
+    min-height: 600px;
+    background: var(--gray-1);
+  }
+  .filter-sidebar {
+    width: 220px;
+    background: #fff;
+    border-right: 1px solid var(--gray-2);
+    padding: 24px 16px;
+    flex-shrink: 0;
+  }
+  .filter-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-3);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .filter-group { margin-bottom: 24px; }
+  .filter-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--graphite);
+    margin-bottom: 8px;
+  }
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+  }
+  .filter-option input[type="checkbox"] {
+    accent-color: var(--green);
+    width: 14px; height: 14px;
+  }
+  .catalog-main { flex: 1; padding: 24px; }
+  .catalog-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .catalog-count { font-size: 13px; color: var(--gray-3); font-weight: 400; }
+  .sort-select {
+    padding: 6px 12px;
+    border: 1px solid var(--gray-2);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Barlow', sans-serif;
+    color: var(--graphite);
+    background: #fff;
+  }
+  /* pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 28px;
+  }
+  .page-num {
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    font-size: 13px; font-weight: 700;
+    border: 1.5px solid var(--gray-2);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--graphite);
+    background: #fff;
+    transition: all 0.15s;
+  }
+  .page-num:hover, .page-num.active { background: var(--green); color: #fff; border-color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav">
+  <a class="sh-logo" href="index.html">STRONG<em>HEALTH</em></a>
+  <div class="sh-nav-links">
+    <a href="index.html">Início</a>
+    <a href="catalogo.html" class="active-link">Produtos</a>
+    <a href="blog.html">Blog</a>
+  </div>
+  <div class="sh-nav-right">
+    <div class="search-bar" style="max-width:260px;margin:0">
+      <span style="color:#9ca3af;font-size:14px">🔍</span>
+      <input type="text" placeholder="Buscar produto..." value="whey protein" />
+    </div>
+    <a href="carrinho.html" class="sh-nav-icon" style="position:relative">🛒<span class="cart-badge">3</span></a>
+    <a href="login.html" class="btn-primary">Minha Conta</a>
+  </div>
+</nav>
+
+<!-- CATEGORY STRIP -->
+<div class="cat-strip">
+  <a href="catalogo.html" class="cat-chip">Todos</a>
+  <a href="catalogo.html" class="cat-chip active">🏋️ Hipertrofia</a>
+  <a href="catalogo.html" class="cat-chip">⚡ Energia</a>
+  <a href="catalogo.html" class="cat-chip">🔥 Emagrecimento</a>
+  <a href="catalogo.html" class="cat-chip">🧬 Saúde</a>
+  <a href="catalogo.html" class="cat-chip">💊 Vitaminas</a>
+</div>
+
+<!-- CATALOG LAYOUT -->
+<div class="catalog-layout">
+  <aside class="filter-sidebar">
+    <div class="filter-title">Filtros</div>
+    <div class="filter-group">
+      <div class="filter-label">Objetivo</div>
+      <label class="filter-option"><input type="checkbox" checked> Hipertrofia</label>
+      <label class="filter-option"><input type="checkbox"> Emagrecimento</label>
+      <label class="filter-option"><input type="checkbox"> Performance</label>
+      <label class="filter-option"><input type="checkbox"> Saúde geral</label>
+      <label class="filter-option"><input type="checkbox"> Energia</label>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Tipo de produto</div>
+      <label class="filter-option"><input type="checkbox" checked> Proteínas</label>
+      <label class="filter-option"><input type="checkbox"> Aminoácidos</label>
+      <label class="filter-option"><input type="checkbox"> Vitaminas</label>
+      <label class="filter-option"><input type="checkbox"> Pré-treino</label>
+      <label class="filter-option"><input type="checkbox"> Thermogênicos</label>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Faixa de preço</div>
+      <label class="filter-option"><input type="checkbox"> Até R$ 50</label>
+      <label class="filter-option"><input type="checkbox" checked> R$ 50 – R$ 150</label>
+      <label class="filter-option"><input type="checkbox"> R$ 150 – R$ 300</label>
+      <label class="filter-option"><input type="checkbox"> Acima de R$ 300</label>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Avaliação</div>
+      <label class="filter-option"><input type="checkbox"> ★★★★★ só</label>
+      <label class="filter-option"><input type="checkbox" checked> ★★★★ ou mais</label>
+      <label class="filter-option"><input type="checkbox"> ★★★ ou mais</label>
+    </div>
+    <button class="btn-primary" style="width:100%;margin-top:8px">Aplicar Filtros</button>
+    <button class="btn-outline" style="width:100%;margin-top:8px">Limpar</button>
+  </aside>
+
+  <div class="catalog-main">
+    <div class="catalog-top">
+      <span class="catalog-count">Mostrando <strong style="color:#26293a">48</strong> resultados em "Hipertrofia"</span>
+      <select class="sort-select">
+        <option>Mais relevantes</option>
+        <option>Menor preço</option>
+        <option>Maior preço</option>
+        <option>Mais vendidos</option>
+        <option>Melhor avaliados</option>
+      </select>
+    </div>
+    <div class="product-grid">
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🥛<div class="product-tag"><span class="badge badge-red">-20% OFF</span></div></div>
+        <div class="product-body">
+          <div class="product-cat">Proteína</div>
+          <div class="product-name">Whey Protein Isolado 900g</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(284)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 189,90</span><span class="product-price-old">R$ 237,00</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">💊</div>
+        <div class="product-body">
+          <div class="product-cat">Aminoácido</div>
+          <div class="product-name">Creatina Monohidratada 300g</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(512)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 74,90</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🥤<div class="product-tag"><span class="badge badge-green">NOVO</span></div></div>
+        <div class="product-body">
+          <div class="product-cat">Proteína</div>
+          <div class="product-name">Whey Concentrado 2kg</div>
+          <div class="product-stars">★★★★☆ <span style="color:#9ca3af;font-size:11px">(127)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 219,90</span><span class="product-price-old">R$ 259,00</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🧬</div>
+        <div class="product-body">
+          <div class="product-cat">Aminoácido</div>
+          <div class="product-name">BCAA 2:1:1 Aminoácidos 300g</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(96)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 89,90</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🌿</div>
+        <div class="product-body">
+          <div class="product-cat">Vitaminas</div>
+          <div class="product-name">Multivitamínico Sport 60 caps</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(211)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 49,90</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">⚡<div class="product-tag"><span class="badge badge-yellow">FRETE GRÁTIS</span></div></div>
+        <div class="product-body">
+          <div class="product-cat">Energia</div>
+          <div class="product-name">Pré-treino Explosão Total 300g</div>
+          <div class="product-stars">★★★★☆ <span style="color:#9ca3af;font-size:11px">(178)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 129,90</span><span class="product-price-old">R$ 149,90</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🥛<div class="product-tag"><span class="badge badge-purple">PREMIUM</span></div></div>
+        <div class="product-body">
+          <div class="product-cat">Proteína</div>
+          <div class="product-name">Whey Hydro 900g</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(63)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 289,90</span><span class="product-price-old">R$ 339,00</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+      <a href="produto.html" class="product-card">
+        <div class="product-img">🏋️</div>
+        <div class="product-body">
+          <div class="product-cat">Proteína</div>
+          <div class="product-name">Pack Iniciante — 3 produtos</div>
+          <div class="product-stars">★★★★★ <span style="color:#9ca3af;font-size:11px">(440)</span></div>
+          <div class="product-price-row"><span class="product-price">R$ 349,90</span><span class="product-price-old">R$ 420,00</span></div>
+          <button class="btn-add">+ Adicionar ao Carrinho</button>
+        </div>
+      </a>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <a href="catalogo.html" class="page-num active">1</a>
+      <a href="catalogo.html" class="page-num">2</a>
+      <a href="catalogo.html" class="page-num">3</a>
+      <a href="catalogo.html" class="page-num">4</a>
+      <a href="catalogo.html" class="page-num">→</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  © 2026 Strong Health — Academia Digital de Suplementação. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>

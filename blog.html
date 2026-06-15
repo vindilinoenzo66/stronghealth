@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strong Health — Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700;800&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .blog-hero {
+    background: linear-gradient(135deg, #1a1c24 0%, #0f2418 60%, #162a1e 100%);
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .blog-hero h1 { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .blog-hero h1 span { color: var(--green); }
+  .blog-hero p { font-size: 15px; color: #8a9ab0; max-width: 500px; margin: 0 auto; }
+
+  .blog-layout {
+    display: flex;
+    gap: 32px;
+    padding: 40px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .blog-main { flex: 1; }
+  .blog-aside { width: 280px; flex-shrink: 0; }
+
+  .blog-card {
+    background: #fff;
+    border: 1px solid var(--gray-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 0;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s;
+  }
+  .blog-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .blog-card-img {
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+  .blog-card-body { padding: 20px; flex: 1; }
+  .blog-card-cat { margin-bottom: 10px; }
+  .blog-card-title { font-size: 17px; font-weight: 700; color: var(--graphite); margin-bottom: 8px; line-height: 1.3; }
+  .blog-card-excerpt { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 12px; }
+  .blog-card-meta { font-size: 11px; color: var(--gray-3); font-weight: 600; display: flex; gap: 16px; }
+
+  .aside-card {
+    background: #fff;
+    border: 1px solid var(--gray-2);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .aside-title { font-size: 14px; font-weight: 700; color: var(--graphite); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-2); }
+  .aside-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid var(--gray-2);
+    color: var(--graphite);
+    margin: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .aside-tag:hover { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .popular-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-2);
+    text-decoration: none;
+    color: inherit;
+  }
+  .popular-item:last-child { border-bottom: none; }
+  .popular-num { font-size: 18px; font-weight: 800; color: var(--green-l); min-width: 24px; }
+  .popular-title { font-size: 12px; font-weight: 700; color: var(--graphite); line-height: 1.3; }
+  .popular-item:hover .popular-title { color: var(--green-d); }
+
+  .blog-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="sh-nav">
+  <a class="sh-logo" href="index.html">STRONG<em>HEALTH</em></a>
+  <div class="sh-nav-links">
+    <a href="index.html">Início</a>
+    <a href="catalogo.html">Produtos</a>
+    <a href="blog.html" class="active-link">Blog</a>
+    <a href="index.html#sobre">Sobre</a>
+  </div>
+  <div class="sh-nav-right">
+    <a href="carrinho.html" class="sh-nav-icon" style="position:relative">🛒<span class="cart-badge">3</span></a>
+    <a href="login.html" class="btn-primary">Minha Conta</a>
+  </div>
+</nav>
+
+<!-- BLOG HERO -->
+<div class="blog-hero">
+  <h1>Personal Trainer <span>Digital</span></h1>
+  <p>Conteúdo especializado em suplementação, treino e nutrição para você alcançar seus objetivos.</p>
+</div>
+
+<!-- BLOG BODY -->
+<div class="blog-layout">
+
+  <!-- MAIN -->
+  <div class="blog-main">
+    <div class="blog-filters">
+      <a href="blog.html" class="cat-chip active">Todos</a>
+      <a href="blog.html" class="cat-chip">💪 Hipertrofia</a>
+      <a href="blog.html" class="cat-chip">🔥 Emagrecimento</a>
+      <a href="blog.html" class="cat-chip">⚡ Performance</a>
+      <a href="blog.html" class="cat-chip">🌿 Saúde</a>
+      <a href="blog.html" class="cat-chip">🥤 Nutrição</a>
+    </div>
+
+    <a href="blog.html" class="blog-card">
+      <div class="blog-card-img" style="background:linear-gradient(135deg,#1a8a4a,#2ecc71)">💪</div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat"><span class="badge badge-green">Hipertrofia</span></div>
+        <div class="blog-card-title">Como escolher o Whey Protein certo para seus objetivos</div>
+        <div class="blog-card-excerpt">Entenda as diferenças entre Whey Concentrado, Isolado e Hidrolisado e descubra qual é o ideal para o seu perfil e metas de treino.</div>
+        <div class="blog-card-meta">
+          <span>📅 08 Jun 2026</span>
+          <span>⏱ 5 min de leitura</span>
+          <span>👁 2.4k visualizações</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog.html" class="blog-card">
+      <div class="blog-card-img" style="background:linear-gradient(135deg,#7b56d3,#a07cd3)">⚡</div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat"><span class="badge badge-purple">Performance</span></div>
+        <div class="blog-card-title">Creatina: guia completo para iniciantes e avançados</div>
+        <div class="blog-card-excerpt">Tudo o que você precisa saber sobre creatina: como funciona, dosagem ideal, quando tomar e quais são os benefícios comprovados pela ciência.</div>
+        <div class="blog-card-meta">
+          <span>📅 05 Jun 2026</span>
+          <span>⏱ 8 min de leitura</span>
+          <span>👁 3.1k visualizações</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog.html" class="blog-card">
+      <div class="blog-card-img" style="background:linear-gradient(135deg,#a07c10,#f5c443)">🔥</div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat"><span class="badge badge-yellow">Emagrecimento</span></div>
+        <div class="blog-card-title">Pré-treino e emagrecimento: o que realmente funciona</div>
+        <div class="blog-card-excerpt">Análise dos termogênicos e pré-treinos mais populares do mercado: ingredientes ativos, eficácia e como combinar com a dieta para perder gordura.</div>
+        <div class="blog-card-meta">
+          <span>📅 01 Jun 2026</span>
+          <span>⏱ 6 min de leitura</span>
+          <span>👁 1.8k visualizações</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog.html" class="blog-card">
+      <div class="blog-card-img" style="background:linear-gradient(135deg,#185fa5,#4a9fd4)">🧬</div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat"><span class="badge badge-purple">Saúde</span></div>
+        <div class="blog-card-title">BCAA: aminoácidos essenciais para recuperação muscular</div>
+        <div class="blog-card-excerpt">Descubra como o BCAA 2:1:1 age na recuperação muscular pós-treino, redução do catabolismo e aumento da síntese proteica.</div>
+        <div class="blog-card-meta">
+          <span>📅 28 Mai 2026</span>
+          <span>⏱ 4 min de leitura</span>
+          <span>👁 1.2k visualizações</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="blog.html" class="blog-card">
+      <div class="blog-card-img" style="background:linear-gradient(135deg,#1a8a4a,#52d68a)">🌿</div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat"><span class="badge badge-green">Nutrição</span></div>
+        <div class="blog-card-title">Vitaminas e minerais: quais suplementar para atletas</div>
+        <div class="blog-card-excerpt">Guia prático sobre os micronutrientes mais importantes para quem treina: Vitamina D, Magnésio, Zinco e como evitar deficiências comuns.</div>
+        <div class="blog-card-meta">
+          <span>📅 20 Mai 2026</span>
+          <span>⏱ 7 min de leitura</span>
+          <span>👁 980 visualizações</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- PAGINATION -->
+    <div style="display:flex;justify-content:center;gap:6px;margin-top:8px">
+      <a href="blog.html" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:700;border:1.5px solid var(--green);background:var(--green);color:#fff;text-decoration:none">1</a>
+      <a href="blog.html" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:700;border:1.5px solid var(--gray-2);background:#fff;color:var(--graphite);text-decoration:none">2</a>
+      <a href="blog.html" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:700;border:1.5px solid var(--gray-2);background:#fff;color:var(--graphite);text-decoration:none">3</a>
+      <a href="blog.html" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:700;border:1.5px solid var(--gray-2);background:#fff;color:var(--graphite);text-decoration:none">→</a>
+    </div>
+  </div>
+
+  <!-- ASIDE -->
+  <div class="blog-aside">
+    <div class="aside-card">
+      <div class="aside-title">🔥 Mais lidos</div>
+      <a href="blog.html" class="popular-item">
+        <div class="popular-num" style="color:#f5c443">01</div>
+        <div class="popular-title">Creatina: guia completo para iniciantes e avançados</div>
+      </a>
+      <a href="blog.html" class="popular-item">
+        <div class="popular-num" style="color:#9ca3af">02</div>
+        <div class="popular-title">Como escolher o Whey Protein certo para seus objetivos</div>
+      </a>
+      <a href="blog.html" class="popular-item">
+        <div class="popular-num" style="color:#cd7f32">03</div>
+        <div class="popular-title">Pré-treino e emagrecimento: o que realmente funciona</div>
+      </a>
+      <a href="blog.html" class="popular-item">
+        <div class="popular-num" style="color:#e5e7eb">04</div>
+        <div class="popular-title">BCAA: aminoácidos essenciais para recuperação muscular</div>
+      </a>
+    </div>
+
+    <div class="aside-card">
+      <div class="aside-title">🏷️ Categorias</div>
+      <a href="blog.html" class="aside-tag">💪 Hipertrofia</a>
+      <a href="blog.html" class="aside-tag">🔥 Emagrecimento</a>
+      <a href="blog.html" class="aside-tag">⚡ Performance</a>
+      <a href="blog.html" class="aside-tag">🌿 Saúde</a>
+      <a href="blog.html" class="aside-tag">🥤 Nutrição</a>
+      <a href="blog.html" class="aside-tag">🧬 Ciência</a>
+    </div>
+
+    <div class="aside-card" style="background:linear-gradient(135deg,#1a1c24,#0f2418);border-color:#2a3a2e">
+      <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:8px">💊 Produtos em destaque</div>
+      <div style="font-size:12px;color:#8a9ab0;margin-bottom:16px">Suplementos mais vendidos desta semana</div>
+      <a href="catalogo.html" class="btn-primary" style="width:100%;text-align:center;display:block">Ver catálogo →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="sh-footer">
+  © 2026 Strong Health — Academia Digital de Suplementação. Todos os direitos reservados. &nbsp;·&nbsp; Consulte um nutricionista antes de iniciar a suplementação.
+</footer>
+
+</body>
+</html>
