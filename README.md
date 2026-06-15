@@ -136,7 +136,7 @@ strong-health/
 │   ├── tipografia.pdf                # Proposta tipográfica
 │   └── metafora-cores.pdf            # Metáfora e esquema de cores
 ├── design/
-│   └── enzoid.html                   # Design system / protótipo HTML
+│   └── index.html                   # Design system / protótipo HTML
 ├── apresentacao/
 │   └── LojaSuplementacao_Apresentacao.pptx
 └── README.md
